@@ -759,11 +759,11 @@ export async function createMarketSale(bid: number, tokenId: number) {
     const price = ethers.utils.parseUnits(bid.toString(), "ether");
 
     //TODO: Handle this logic within MKT Contract
-    /*
+  
     const ftContract = new ethers.Contract(ftaddress, FT.abi, bidderSigner);
     const ap = await ftContract.connect(bidderSigner).transfer(nftmarketaddress, price);
     await ap.wait(); 
-    */
+ 
 
     const transaction = await marketContract.createMarketSale(
       nftaddress,
