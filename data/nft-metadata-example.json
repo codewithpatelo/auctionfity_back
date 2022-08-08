@@ -1,0 +1,19 @@
+{
+  "description": "nftArt",
+  "image": "https://bafybeidtdhffgnvfif33x5ydwjm6safwofuabd4l3k7zaqic3tw7a7lt4i.ipfs.dweb.link/cryptoArtExample.png",
+  "name": "nftArt #123",
+  "attributes": [
+    {
+      "trait_type": "Style",
+      "value": "Modernist"
+    },
+    {
+      "trait_type": "Main Color",
+      "value": "Black"
+    },
+    {
+      "trait_type": "Secondary Color",
+      "value": "Purple"
+    }
+  ]
+}

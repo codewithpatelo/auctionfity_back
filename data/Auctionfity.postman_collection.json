@@ -1,0 +1,707 @@
+{
+	"info": {
+		"_postman_id": "2e4a4553-f70d-42fb-959a-3a67997bcf7f",
+		"name": "Auctionfity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1811798"
+	},
+	"item": [
+		{
+			"name": "MKT Accounts Fetch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/accounts",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Mint",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tokenUri\": \"https://bafkreiaf7bagtnxfrspddvls2yoppac6qr432ki5hqwvsp7exgomxlaft4.ipfs.nftstorage.link\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/nfts/mint",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"mint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Init",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/init",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Approve",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nfts\": [{\"tokenId\": 1, \"price\": 0.035}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/approve",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Approve Batch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nfts\": [{\"tokenId\": 1, \"price\": 0.035}, {\"tokenId\": 2, \"price\": 0.035}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/approve",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Fetch Approved",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nfts\": [{\"tokenId\": 1, \"price\": 0.035}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FT Approve",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"quantity\": 1000000000000000}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/token/approve",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"token",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Listings Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nft\": {\"tokenId\": 1}, \"minPrice\": 50}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/list",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Listings Fetch ByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings?startTime=2021-06-01&endTime=2022-09-09",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings"
+					],
+					"query": [
+						{
+							"key": "startTime",
+							"value": "2021-06-01"
+						},
+						{
+							"key": "endTime",
+							"value": "2022-09-09"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Listings Fetch ByOwner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings?owner=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings"
+					],
+					"query": [
+						{
+							"key": "owner",
+							"value": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Listings Fetch ByTokenId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings?tokenId=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings"
+					],
+					"query": [
+						{
+							"key": "tokenId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFT Listings Fetch All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Signatures Fetch ByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/signatures?startTime=2021-06-01&endTime=2022-09-09",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signatures"
+					],
+					"query": [
+						{
+							"key": "startTime",
+							"value": "2021-06-01"
+						},
+						{
+							"key": "endTime",
+							"value": "2022-09-09"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Signatures Fetch ByOperation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/signatures?operation=LISTNFT",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signatures"
+					],
+					"query": [
+						{
+							"key": "operation",
+							"value": "LISTNFT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Signatures Fetch BySigner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/signatures?signer=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signatures"
+					],
+					"query": [
+						{
+							"key": "signer",
+							"value": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Signatures Fetch All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/signatures",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signatures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Bids Offer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"price\": 90, \"tokenId\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings/bid-offer",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings",
+						"bid-offer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Bids Fetch ByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings/bids?startTime=2021-06-01&endTime=2022-09-09&tokenId=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings",
+						"bids"
+					],
+					"query": [
+						{
+							"key": "startTime",
+							"value": "2021-06-01"
+						},
+						{
+							"key": "endTime",
+							"value": "2022-09-09"
+						},
+						{
+							"key": "tokenId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Bids Fetch ByBidder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings/bids?bidder=0x70997970C51812dc3A010C7d01b50e0d17dc79C8&tokenId=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings",
+						"bids"
+					],
+					"query": [
+						{
+							"key": "bidder",
+							"value": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+						},
+						{
+							"key": "tokenId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Bids Fetch All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings/bids?bidder=0x70997970C51812dc3A010C7d01b50e0d17dc79C8&tokenId=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings",
+						"bids"
+					],
+					"query": [
+						{
+							"key": "bidder",
+							"value": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+						},
+						{
+							"key": "tokenId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Bids Accept",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"price\": 50, \"tokenId\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/listings/bid-accept",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"listings",
+						"bid-accept"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Settle Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tokenId\": 1, \"bidderSignature\": {\n        \"r\": \"0x7f6e2a6fce8f54b25ef0f5dba37d6c4b1a063ce3c7afc0ee3ba6568619777fbb\",\n        \"s\": \"0x75c4cdc54ecedf68a43775742f3fe5b956098ca0ff8f95c824b47816a723d01c\",\n        \"_vs\": \"0xf5c4cdc54ecedf68a43775742f3fe5b956098ca0ff8f95c824b47816a723d01c\",\n        \"recoveryParam\": 1,\n        \"v\": 28,\n        \"yParityAndS\": \"0xf5c4cdc54ecedf68a43775742f3fe5b956098ca0ff8f95c824b47816a723d01c\",\n        \"compact\": \"0x7f6e2a6fce8f54b25ef0f5dba37d6c4b1a063ce3c7afc0ee3ba6568619777fbbf5c4cdc54ecedf68a43775742f3fe5b956098ca0ff8f95c824b47816a723d01c\"\n    }, \"nftOwnerSignature\": {\n        \"r\": \"0xca7a2a7760cf9670e3db308380fb886665adfcaa56f4d972c435e4178ee72fec\",\n        \"s\": \"0x69f1462599593d67eb842e26a27b92af966640a2bb335d07bca5946269243267\",\n        \"_vs\": \"0x69f1462599593d67eb842e26a27b92af966640a2bb335d07bca5946269243267\",\n        \"recoveryParam\": 0,\n        \"v\": 27,\n        \"yParityAndS\": \"0x69f1462599593d67eb842e26a27b92af966640a2bb335d07bca5946269243267\",\n        \"compact\": \"0xca7a2a7760cf9670e3db308380fb886665adfcaa56f4d972c435e4178ee72fec69f1462599593d67eb842e26a27b92af966640a2bb335d07bca5946269243267\"\n    }\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/settle",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"settle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MKT Settle Transaction NoVerify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tokenId\": 2, \"bid\": 0.035}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:3000/api/nfts/settle/noverify",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nfts",
+						"settle",
+						"noverify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

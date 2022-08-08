@@ -1,0 +1,12 @@
+node_modules
+artifacts
+cache
+contracts
+config.ts
+.env
+package-lock.json
+.eslintrc.js
+coverage
+coverage.json
+typechain
+typechain-types

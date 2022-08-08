@@ -1,0 +1,19 @@
+{
+  "description": "nftArt 2",
+  "image": "https://bafybeiep3bp2fcs6m777la7nx7tldaxrba5t4onopen5tmktvkhiarukpa.ipfs.dweb.link/cryptoArtExample2.png",
+  "name": "nftArt #234",
+  "attributes": [
+    {
+      "trait_type": "Style",
+      "value": "Modernist"
+    },
+    {
+      "trait_type": "Main Color",
+      "value": "White"
+    },
+    {
+      "trait_type": "Secondary Color",
+      "value": "Black"
+    }
+  ]
+}
