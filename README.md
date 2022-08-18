@@ -191,6 +191,5 @@ npm run format
 * finish ut for settleTransaction function (it can be tested via postman though)
 * add test coverage
 * add full coverage smart contract ut
-* further tests and deployments in Ropsten Network
 * refactor controllers and services to reduce code lines per file and avoid cases of repeated code
 * integrate Mongoose for more convenient data quering
