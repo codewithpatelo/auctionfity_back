@@ -16,6 +16,12 @@ sibling system that assist the on-chain pieces. This is a simple off-chain syste
 and the on-chain smart-contract to enable cheap auctions. The goal is to enable
 trades between an ERC721 and a ERC20 with a single on-chain transaction.
 
+## Installation
+
+```shell
+npm i .
+```
+
 ## To run in development (Local Test Network)
 
 1- Compile contracts ```shell npm run compile ```
