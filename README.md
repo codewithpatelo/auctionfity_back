@@ -24,17 +24,12 @@ npm i .
 
 ## To run in development (Local Test Network)
 
-1. Compile contracts ```shell npm run compile ```
-2. Start a local node ```shell npm run start:node ```
-3. Deploy contracts to local node ```shell npm run deploy:dev ```
+1. Compile contracts ```npm run compile ```
+2. Start a local node ```npm run start:node ```
+3. Deploy contracts to local node ```npm run deploy:dev ```
 4. Start Auctionfity app 
 5. Use postman collection to communicate with Auctionfity application (./data/Auctionfity.postman_collection.json)
 
-```shell
-npm run start:node
-npm run deploy:dev
-npm run start
-```
 ![image](https://user-images.githubusercontent.com/16574952/183389011-662ee451-e537-402b-bf7e-24ea556be9b8.png)
 ![image](https://user-images.githubusercontent.com/16574952/183389105-9f39441f-60b0-4f7d-a5f5-944633229691.png)
 ![image](https://user-images.githubusercontent.com/16574952/183389194-b300cb15-98a3-46ad-b9ef-9c23b7b968ab.png)
@@ -59,14 +54,19 @@ npm run test
 2. Create an Alchemy Account: https://www.alchemy.com/
 3. Create an App with network option as "Goerli"
 4. Press "View key" and the copy API KEY value to .env GI_API_KEY= value
-5. npx hardhat init (this will initiate init task that will create bidder and nftowner wallets)
+5. Create wallets ```npx hardhat init ``` (this will initiate init task that will create bidder and nftowner wallets)
 6. Copy both private keys and addresses and fill that data in our .env file (NFTOWNER_PRIVATE_KEY,BIDDER_PRIVATE_KEY,NFTOWNER_ADDR,BIDDER_ADDR)
 7. Make sure to write STAG after ENVIRONMENT property at .env
-8. Compile contracts ```shell npm run compile ```
-9. Deploy contracts to Goerli ```shell npm run deploy:stag ```
+8. Compile contracts ```npm run compile ```
+9. Deploy contracts to Goerli ```npm run deploy:stag ```
 10. Provide faucets for both Bidder and NFTOwner accounts at https://goerlifaucet.com/
-11. Start Auctionfity app ```shell npm run start ```
+11. Start Auctionfity app ```npm run start ```
 12. Use postman collection to communicate with Auctionfity application (./data/Auctionfity.postman_collection.json)
+
+![image](https://user-images.githubusercontent.com/16574952/185500446-d5b87344-867d-43cc-9098-5643fb5bdf23.png)
+
+
+![image](https://user-images.githubusercontent.com/16574952/185500402-ad127e63-8411-4ed0-8ce3-a674fb35aeca.png)
 
 
 # APPLICATION ENDPOINTS:
