@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "ethers";
 
-
 import {
   acceptBid,
   approveNftsToMarket,
@@ -150,7 +149,8 @@ describe("NFTMarket", function () {
     expect(result["OPERATION"]).to.equal("SUCCESS");
   });
 
-  it.skip("Anyone with both signatures can settle the transaction, the owner takes the ERC20 whilst the bidder takes the NFT.", async function () { //TODO: Finish this UT and correct mocks
+  it.skip("Anyone with both signatures can settle the transaction, the owner takes the ERC20 whilst the bidder takes the NFT.", async function () {
+    //TODO: Finish this UT and correct mocks
     const bidderSignature = await fetchSignatures({
       operation: auctionOperationTypeEnum.OFFERBID,
     });

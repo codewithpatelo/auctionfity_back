@@ -34,7 +34,6 @@ let bidderAddr: string | number = 1; // Address or index
 let network = "";
 let providerUrl = "";
 
-
 if (environment == "STAG" && process.env.GI_API_KEY) {
   network = "goerli";
   providerUrl = `https://eth-goerli.g.alchemy.com/v2/${process.env.GI_API_KEY}`;
@@ -54,12 +53,20 @@ if (
 
 const provider =
   network == "goerli"
-    ? new ethers.providers.AlchemyProvider(network="goerli", process.env.GI_API_KEY)
+    ? new ethers.providers.AlchemyProvider(
+        (network = "goerli"),
+        process.env.GI_API_KEY
+      )
     : new ethers.providers.JsonRpcProvider(providerUrl);
 
-
-const nftOwnerSigner = (environment == 'STAG' && process.env.NFTOWNER_PRIVATE_KEY) ? new ethers.Wallet(process.env.NFTOWNER_PRIVATE_KEY, provider): provider.getSigner(nftOwnerAddr); //  - Signer who owns NFT
-const bidderSigner = (environment == 'STAG' && process.env.BIDDER_PRIVATE_KEY) ? new ethers.Wallet(process.env.BIDDER_PRIVATE_KEY, provider): provider.getSigner(bidderAddr); // - Signer who owns Auction Tokens
+const nftOwnerSigner =
+  environment == "STAG" && process.env.NFTOWNER_PRIVATE_KEY
+    ? new ethers.Wallet(process.env.NFTOWNER_PRIVATE_KEY, provider)
+    : provider.getSigner(nftOwnerAddr); //  - Signer who owns NFT
+const bidderSigner =
+  environment == "STAG" && process.env.BIDDER_PRIVATE_KEY
+    ? new ethers.Wallet(process.env.BIDDER_PRIVATE_KEY, provider)
+    : provider.getSigner(bidderAddr); // - Signer who owns Auction Tokens
 
 export async function fetchAccounts(): Promise<auctionOperationDto> {
   try {
@@ -115,7 +122,7 @@ export async function mintNft(tokenUri?: string): Promise<auctionOperationDto> {
       ENV: environment,
       ISONCHAIN: true,
       NETWORK: network,
-      RESULT: {tokenId: tokenId, tx: mintTx},
+      RESULT: { tokenId: tokenId, tx: mintTx },
       CONTRACT: "NFT",
       CONTRACTADDR: nftaddress,
       SIGNER: signerAddr,
@@ -815,11 +822,12 @@ export async function createMarketSale(bid: number, tokenId: number) {
     const price = ethers.utils.parseUnits(bid.toString(), "ether");
 
     //TODO: Handle this logic within MKT Contract
-  
+
     const ftContract = new ethers.Contract(ftaddress, FT.abi, bidderSigner);
-    const ap = await ftContract.connect(bidderSigner).transfer(nftmarketaddress, price);
-    await ap.wait(); 
- 
+    const ap = await ftContract
+      .connect(bidderSigner)
+      .transfer(nftmarketaddress, price);
+    await ap.wait();
 
     const transaction = await marketContract.createMarketSale(
       nftaddress,
