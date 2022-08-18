@@ -66,7 +66,7 @@ npm run test
 ![image](https://user-images.githubusercontent.com/16574952/185500446-d5b87344-867d-43cc-9098-5643fb5bdf23.png)
 
 
-![image](https://user-images.githubusercontent.com/16574952/185500402-ad127e63-8411-4ed0-8ce3-a674fb35aeca.png)
+![image](https://user-images.githubusercontent.com/16574952/185500780-4f4ed18b-96fd-4d97-b93e-c45c4fee0d1e.png)
 
 
 # APPLICATION ENDPOINTS:
