@@ -193,3 +193,4 @@ npm run format
 * add full coverage smart contract ut
 * refactor controllers and services to reduce code lines per file and avoid cases of repeated code
 * integrate Mongoose for more convenient data quering
+* update software architecture diagram with Alchemy and Goerli (replacing Ropsten)
