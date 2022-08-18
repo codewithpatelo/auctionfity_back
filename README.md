@@ -24,11 +24,11 @@ npm i .
 
 ## To run in development (Local Test Network)
 
-1- Compile contracts ```shell npm run compile ```
-2- Start a local node ```shell npm run start:node ```
-3- Deploy contracts to local node ```shell npm run deploy:dev ```
-4- Start Auctionfity app 
-5- Use postman collection to communicate with Auctionfity application (./data/Auctionfity.postman_collection.json)
+1. Compile contracts ```shell npm run compile ```
+2. Start a local node ```shell npm run start:node ```
+3. Deploy contracts to local node ```shell npm run deploy:dev ```
+4. Start Auctionfity app 
+5. Use postman collection to communicate with Auctionfity application (./data/Auctionfity.postman_collection.json)
 
 ```shell
 npm run start:node
@@ -55,18 +55,18 @@ npm run test
 ## To run in stagging (Goerli Test Network)
 
 
-1- Copy .env.example file and paste with the name '.env'
-2- Create an Alchemy Account: https://www.alchemy.com/
-3- Create an App with network option as "Goerli"
-4- Press "View key" and the copy API KEY value to .env GI_API_KEY= value
-5- npx hardhat init (this will initiate init task that will create bidder and nftowner wallets)
-6- Copy both private keys and addresses and fill that data in our .env file (NFTOWNER_PRIVATE_KEY,BIDDER_PRIVATE_KEY,NFTOWNER_ADDR,BIDDER_ADDR)
-7- Make sure to write STAG after ENVIRONMENT property at .env
-8- Compile contracts ```shell npm run compile ```
-9- Deploy contracts to Goerli ```shell npm run deploy:stag ```
-10- Provide faucets for both Bidder and NFTOwner accounts at https://goerlifaucet.com/
-11- Start Auctionfity app ```shell npm run start ```
-12- Use postman collection to communicate with Auctionfity application (./data/Auctionfity.postman_collection.json)
+1. Copy .env.example file and paste with the name '.env'
+2. Create an Alchemy Account: https://www.alchemy.com/
+3. Create an App with network option as "Goerli"
+4. Press "View key" and the copy API KEY value to .env GI_API_KEY= value
+5. npx hardhat init (this will initiate init task that will create bidder and nftowner wallets)
+6. Copy both private keys and addresses and fill that data in our .env file (NFTOWNER_PRIVATE_KEY,BIDDER_PRIVATE_KEY,NFTOWNER_ADDR,BIDDER_ADDR)
+7. Make sure to write STAG after ENVIRONMENT property at .env
+8. Compile contracts ```shell npm run compile ```
+9. Deploy contracts to Goerli ```shell npm run deploy:stag ```
+10. Provide faucets for both Bidder and NFTOwner accounts at https://goerlifaucet.com/
+11. Start Auctionfity app ```shell npm run start ```
+12. Use postman collection to communicate with Auctionfity application (./data/Auctionfity.postman_collection.json)
 
 
 # APPLICATION ENDPOINTS:
