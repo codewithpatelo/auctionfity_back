@@ -34,9 +34,10 @@ let bidderAddr: string | number = 1; // Address or index
 let network = "";
 let providerUrl = "";
 
-if (environment == "STAG" && process.env.ROPSTEN_URL) {
-  network = "ropsten";
-  providerUrl = process.env.ROPSTEN_URL;
+
+if (environment == "STAG" && process.env.GI_API_KEY) {
+  network = "goerli";
+  providerUrl = `https://eth-goerli.g.alchemy.com/v2/${process.env.GI_API_KEY}`;
 } else {
   network = "localhost";
   providerUrl = "http://127.0.0.1:8545";
@@ -52,18 +53,22 @@ if (
 }
 
 const provider =
-  network == "ropsten"
-    ? new ethers.providers.JsonRpcProvider(providerUrl, network)
+  network == "goerli"
+    ? new ethers.providers.AlchemyProvider(network="goerli", process.env.GI_API_KEY)
     : new ethers.providers.JsonRpcProvider(providerUrl);
-const nftOwnerSigner = provider.getSigner(nftOwnerAddr); // JsonRpcSigner - Signer who owns NFT
-const bidderSigner = provider.getSigner(bidderAddr); // JsonRpcSigner - Signer who owns Auction Tokens
+
+
+const nftOwnerSigner = (environment == 'STAG' && process.env.NFTOWNER_PRIVATE_KEY) ? new ethers.Wallet(process.env.NFTOWNER_PRIVATE_KEY, provider): provider.getSigner(nftOwnerAddr); //  - Signer who owns NFT
+const bidderSigner = (environment == 'STAG' && process.env.BIDDER_PRIVATE_KEY) ? new ethers.Wallet(process.env.BIDDER_PRIVATE_KEY, provider): provider.getSigner(bidderAddr); // - Signer who owns Auction Tokens
 
 export async function fetchAccounts(): Promise<auctionOperationDto> {
   try {
     return {
       OPERATION: "SUCCESS",
       TYPE: "FETCHACCOUNTS",
+      ENV: environment,
       ISONCHAIN: false,
+      NETWORK: network,
       RESULT: {
         nftOwner: await nftOwnerSigner.getAddress(),
         bidder: await bidderSigner.getAddress(),
@@ -76,7 +81,9 @@ export async function fetchAccounts(): Promise<auctionOperationDto> {
     return {
       OPERATION: "FAILED",
       TYPE: "FETCHACCOUNTS",
+      ENV: environment,
       ISONCHAIN: false,
+      NETWORK: network,
       RESULT: err,
       SIGNER: "root",
       MESSAGE: `Fetch Operation failed at ${moment()}`,
@@ -105,8 +112,10 @@ export async function mintNft(tokenUri?: string): Promise<auctionOperationDto> {
     return {
       OPERATION: "SUCCESS",
       TYPE: "MINTNFT",
+      ENV: environment,
       ISONCHAIN: true,
-      RESULT: tokenId,
+      NETWORK: network,
+      RESULT: {tokenId: tokenId, tx: mintTx},
       CONTRACT: "NFT",
       CONTRACTADDR: nftaddress,
       SIGNER: signerAddr,
@@ -119,7 +128,9 @@ export async function mintNft(tokenUri?: string): Promise<auctionOperationDto> {
     return {
       OPERATION: "FAILED",
       TYPE: "MINTNFT",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: err,
       CONTRACT: "NFT",
       CONTRACTADDR: nftaddress,
@@ -135,19 +146,27 @@ export async function initAuctionHouse(): Promise<auctionOperationDto> {
     const nft1 = await mintNft(
       "https://bafkreiaf7bagtnxfrspddvls2yoppac6qr432ki5hqwvsp7exgomxlaft4.ipfs.nftstorage.link"
     );
+
+    const sig1 = ""; //await nftOwnerSigner.signTransaction(nft1.RESULT.tx);
+
     const nft2 = await mintNft(
       "https://bafkreid7sghswyrd43vp56rzslhhfrjdxdp6m7oxaf7hmeojnsc5ajyctq.ipfs.nftstorage.link"
     );
+
+    const sig2 = ""; //await nftOwnerSigner.signTransaction(nft2.RESULT.tx);
 
     if (nft1.OPERATION == "SUCCESS" && nft2.OPERATION == "SUCCESS") {
       return {
         OPERATION: "SUCCESS",
         TYPE: "INIT",
+        ENV: environment,
         ISONCHAIN: true,
+        NETWORK: network,
         RESULT: [nft1.RESULT, nft2.RESULT],
         CONTRACT: "NFT",
         CONTRACTADDR: nftaddress,
         SIGNER: await nftOwnerSigner.getAddress(),
+        SIGNATURE: [sig1, sig2],
         MESSAGE: `NFT ids #${nft1.RESULT}, #${
           nft2.RESULT
         } minted by ${await nftOwnerSigner.getAddress()} at ${moment()}.`,
@@ -160,7 +179,9 @@ export async function initAuctionHouse(): Promise<auctionOperationDto> {
     return {
       OPERATION: "FAILED",
       TYPE: "INIT",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: [],
       CONTRACT: "NFT",
       CONTRACTADDR: nftaddress,
@@ -182,7 +203,9 @@ export async function approveNftsToMarket(tokens: Array<nftDto>) {
     return {
       OPERATION: "SUCCESS",
       TYPE: "APPROVENFT",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: (await fetchApprovedNfts()).RESULT,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -194,7 +217,9 @@ export async function approveNftsToMarket(tokens: Array<nftDto>) {
     return {
       OPERATION: "FAILED",
       TYPE: "APPROVENFT",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: err,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -232,7 +257,9 @@ export async function approveNftToMarket(
     return {
       OPERATION: "SUCCESS",
       TYPE: "APPROVENFT",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: marketItemApproved,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -244,7 +271,9 @@ export async function approveNftToMarket(
     return {
       OPERATION: "FAILED",
       TYPE: "APPROVENFT",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: err,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -271,7 +300,9 @@ export async function approveTokenToMarket(
     return {
       OPERATION: "SUCCESS",
       TYPE: "APPROVETOKEN",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: {
         tx: ap,
         balance: await ftContract
@@ -287,7 +318,9 @@ export async function approveTokenToMarket(
     return {
       OPERATION: "FAILED",
       TYPE: "APPROVETOKEN",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: err,
       CONTRACT: "FT",
       CONTRACTADDR: ftaddress,
@@ -335,6 +368,7 @@ export async function listNft(
     return {
       OPERATION: "SUCCESS",
       TYPE: "LISTNFT",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: listings,
       SIGNATURE: signature,
@@ -346,6 +380,7 @@ export async function listNft(
     return {
       OPERATION: "FAILED",
       TYPE: "LISTNFT",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: err,
       SIGNER: await nftOwnerSigner.getAddress(),
@@ -389,6 +424,7 @@ export async function fetchListings(
       return {
         OPERATION: "SUCCESS",
         TYPE: "FETCHLISTINGS",
+        ENV: environment,
         ISONCHAIN: false,
         RESULT: result,
         MESSAGE: `Fetching listings succeded.`,
@@ -400,6 +436,7 @@ export async function fetchListings(
     return {
       OPERATION: "FAILED",
       TYPE: "FETCHLISTINGS",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: err,
       MESSAGE: `Fetching listings failed.`,
@@ -441,6 +478,7 @@ export async function fetchSignatures(
       return {
         OPERATION: "SUCCESS",
         TYPE: "FETCHSIGNATURES",
+        ENV: environment,
         ISONCHAIN: false,
         RESULT: result,
         MESSAGE: `Fetching signatures succeded.`,
@@ -452,6 +490,7 @@ export async function fetchSignatures(
     return {
       OPERATION: "FAILED",
       TYPE: "FETCHSIGNATURES",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: err,
       MESSAGE: `Fetching signatures failed.`,
@@ -516,6 +555,7 @@ export async function offerBid(
     return {
       OPERATION: "SUCCESS",
       TYPE: "OFFERBID",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: getListing(tokenId),
       SIGNATURE: signature,
@@ -533,6 +573,7 @@ export async function offerBid(
     return {
       OPERATION: "FAILED",
       TYPE: "OFFERBID",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: err,
       SIGNER: await bidderSigner.getAddress(),
@@ -577,6 +618,7 @@ export async function fetchBids(
       return {
         OPERATION: "SUCCESS",
         TYPE: "FETCHBIDS",
+        ENV: environment,
         ISONCHAIN: false,
         RESULT: result,
         MESSAGE: `Fetching bids succeded.`,
@@ -588,6 +630,7 @@ export async function fetchBids(
     return {
       OPERATION: "FAILED",
       TYPE: "FETCHBIDS",
+      ENV: environment,
       ISONCHAIN: false,
       RESULT: err,
       MESSAGE: `Fetching bids failed.`,
@@ -621,6 +664,7 @@ export async function acceptBid(tokenId: number): Promise<auctionOperationDto> {
   return {
     OPERATION: "SUCCESS",
     TYPE: "ACCEPTBID",
+    ENV: environment,
     ISONCHAIN: false,
     RESULT: getListing(tokenId),
     SIGNATURE: signature,
@@ -664,7 +708,9 @@ export async function fetchApprovedNfts(): Promise<auctionOperationDto> {
     return {
       OPERATION: "SUCCESS",
       TYPE: "FETCHAPPROVEDNFTS",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: items,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -675,7 +721,9 @@ export async function fetchApprovedNfts(): Promise<auctionOperationDto> {
     return {
       OPERATION: "FAILED",
       TYPE: "FETCHAPPROVEDNFTS",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: err,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -717,10 +765,16 @@ export async function settleTransaction(
 
     const tx = await createMarketSale(Number(bid), tokenId);
 
+    if (tx.error) {
+      throw tx;
+    }
+
     return {
       OPERATION: "SUCCESS",
       TYPE: "SETTLETRANSACTION",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: tx,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -735,7 +789,9 @@ export async function settleTransaction(
     return {
       OPERATION: "FAILED",
       TYPE: "SETTLETRANSACTION",
+      ENV: environment,
       ISONCHAIN: true,
+      NETWORK: network,
       RESULT: err,
       CONTRACT: "MKT",
       CONTRACTADDR: nftmarketaddress,
@@ -743,7 +799,7 @@ export async function settleTransaction(
         (await nftOwnerSigner.getAddress()) +
         "," +
         (await bidderSigner.getAddress()),
-      MESSAGE: `There was a problem with this transaction. Make sure you count with both signatures to settle the transaction, check that the token is approved at the marketplace and has an off-chain listing attached to its id. You also need to make sure that bidder account has approved Auction tokens has sufficient allowance to complete the transaction.`,
+      MESSAGE: `There was a problem with this transaction. Make sure you count with both signatures to settle the transaction, check that the token is approved at the marketplace and has an off-chain listing attached to its id. You also need to make sure that bidder account has approved Auction tokens and has sufficient funds and allowance to complete the transaction.`,
     } as auctionOperationDto;
   }
 }

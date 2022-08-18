@@ -29,7 +29,7 @@ export async function hashMessage(message: string) {
 
 export async function signOperation(
   message: string,
-  signer: ethers.providers.JsonRpcSigner
+  signer: ethers.Wallet | ethers.providers.JsonRpcSigner 
 ): Promise<ethers.Signature> {
   const messageHashBytes = await hashMessage(message);
 
@@ -61,14 +61,28 @@ export async function verifyMessage(
 export type auctionOperationDto = {
   OPERATION: auctionOperationNameEnum;
   TYPE: auctionOperationTypeEnum;
+  ENV?: environmentEnum;
+  NETWORK?: networkEnum;
   ISONCHAIN: boolean;
-  RESULT: any;
+  RESULT: string | object | Array<object> | Array<string>;
   CONTRACT?: smartContractEnum;
   CONTRACTADDR?: string;
-  SIGNATURE?: ethers.Signature;
+  SIGNATURE?: ethers.Signature | Array<ethers.Signature> | Array<string>;
   SIGNER: string;
   MESSAGE: string;
 };
+
+export enum environmentEnum {
+  DEV = "DEV",
+  STAG = "STAG",
+  PROD = "PROD"
+}
+
+export enum networkEnum {
+  localhost = "localhost",
+  goerli = "goerli",
+  ropsten = "ropsten"
+}
 
 export enum smartContractEnum {
   NFT = "NFT",
