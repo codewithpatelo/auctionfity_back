@@ -154,13 +154,11 @@ export async function initAuctionHouse(): Promise<auctionOperationDto> {
       "https://bafkreiaf7bagtnxfrspddvls2yoppac6qr432ki5hqwvsp7exgomxlaft4.ipfs.nftstorage.link"
     );
 
-    const sig1 = ""; //await nftOwnerSigner.signTransaction(nft1.RESULT.tx);
 
     const nft2 = await mintNft(
       "https://bafkreid7sghswyrd43vp56rzslhhfrjdxdp6m7oxaf7hmeojnsc5ajyctq.ipfs.nftstorage.link"
     );
 
-    const sig2 = ""; //await nftOwnerSigner.signTransaction(nft2.RESULT.tx);
 
     if (nft1.OPERATION == "SUCCESS" && nft2.OPERATION == "SUCCESS") {
       return {
@@ -173,7 +171,6 @@ export async function initAuctionHouse(): Promise<auctionOperationDto> {
         CONTRACT: "NFT",
         CONTRACTADDR: nftaddress,
         SIGNER: await nftOwnerSigner.getAddress(),
-        SIGNATURE: [sig1, sig2],
         MESSAGE: `NFT ids #${nft1.RESULT}, #${
           nft2.RESULT
         } minted by ${await nftOwnerSigner.getAddress()} at ${moment()}.`,

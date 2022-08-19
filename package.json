@@ -30,7 +30,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "init": "node ./scripts/address.ts",
     "start": "nodemon ./src/index.ts",
     "start:node": "npx hardhat node",
     "test": "npx hardhat test",
